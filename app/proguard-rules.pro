@@ -73,9 +73,6 @@
 # ChipsLayoutManager
 -dontwarn com.beloo.widget.chipslayoutmanager.**
 
-# Retrolambda
--dontwarn java.lang.invoke.*
-
 #Crashlytics
 -keepattributes *Annotation*
 -keepattributes SourceFile,LineNumberTable
