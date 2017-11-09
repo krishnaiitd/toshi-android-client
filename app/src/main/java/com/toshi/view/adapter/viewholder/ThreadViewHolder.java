@@ -26,6 +26,7 @@ import com.toshi.model.local.Conversation;
 import com.toshi.model.local.Recipient;
 import com.toshi.util.ImageUtil;
 import com.toshi.util.LocaleUtil;
+import com.toshi.view.adapter.listeners.OnItemClickListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -93,5 +94,12 @@ public class ThreadViewHolder extends ClickableViewHolder {
         } else {
             return new SimpleDateFormat("d MMM", LocaleUtil.getLocale()).format(new Date(creationTime));
         }
+    }
+
+    public void setOnItemLongClickListener(final Conversation conversation, final OnItemClickListener<Conversation> listener) {
+        this.itemView.setOnLongClickListener(__ -> {
+            listener.onItemClick(conversation);
+            return true;
+        });
     }
 }

@@ -331,6 +331,22 @@ public class ConversationStore {
         });
     }
 
+    public Completable muteConversation(final String threadId, final boolean mute) {
+        return Completable.fromAction(() -> {
+            final Realm realm = BaseApplication.get().getRealm();
+            final Conversation conversation = realm.where(Conversation.class)
+                    .equalTo(THREAD_ID_FIELD, threadId)
+                    .findFirst();
+            if (conversation != null) {
+                realm.beginTransaction();
+                conversation.setMuted(mute);
+                realm.copyToRealmOrUpdate(conversation);
+                realm.commitTransaction();
+            }
+            realm.close();
+        });
+    }
+
     private void broadcastNewChatMessage(final String threadId, final SofaMessage newMessage) {
         if (watchedThreadId == null || !watchedThreadId.equals(threadId)) {
             return;

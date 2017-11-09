@@ -51,6 +51,7 @@ public class RecentAdapter extends RecyclerView.Adapter<ThreadViewHolder> implem
     private final ArrayList<Conversation> conversationsToDelete;
     private List<Conversation> conversations;
     private OnItemClickListener<Conversation> onItemClickListener;
+    private OnItemClickListener<Conversation> onItemLongClickListener;
 
     public RecentAdapter() {
         this.conversations = new ArrayList<>(0);
@@ -71,6 +72,7 @@ public class RecentAdapter extends RecyclerView.Adapter<ThreadViewHolder> implem
         final String formattedLatestMessage = formatLastMessage(conversation.getLatestMessage());
         holder.setLatestMessage(formattedLatestMessage);
         holder.setOnClickListener(this);
+        holder.setOnItemLongClickListener(conversation, this.onItemLongClickListener);
     }
 
     @Override
@@ -98,6 +100,11 @@ public class RecentAdapter extends RecyclerView.Adapter<ThreadViewHolder> implem
         return this;
     }
 
+    public RecentAdapter setOnItemLongClickListener(final OnItemClickListener<Conversation> onItemLongClickListener) {
+        this.onItemLongClickListener = onItemLongClickListener;
+        return this;
+    }
+
     public void updateConversation(final Conversation conversation) {
         final int position = this.conversations.indexOf(conversation);
         if (position == -1) {
@@ -120,6 +127,12 @@ public class RecentAdapter extends RecyclerView.Adapter<ThreadViewHolder> implem
         this.conversations.remove(position);
         notifyItemRemoved(position);
         conversationsToDelete.add(removedConversation);
+    }
+
+    public void removeItem(final Conversation conversation) {
+        this.conversations.remove(conversation);
+        final int index = this.conversations.indexOf(conversation);
+        notifyItemRemoved(index);
     }
 
     @NonNull

@@ -26,6 +26,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.toshi.R;
 import com.toshi.model.local.Conversation;
+import com.toshi.util.ConversationHandler;
 import com.toshi.util.LogUtil;
 import com.toshi.view.BaseApplication;
 import com.toshi.view.activity.ChatActivity;
@@ -37,6 +38,7 @@ import com.toshi.view.fragment.toplevel.RecentFragment;
 
 import java.util.List;
 
+import kotlin.Unit;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -46,9 +48,10 @@ public final class RecentPresenter implements
         OnItemClickListener<Conversation> {
 
     private RecentFragment fragment;
-    private boolean firstTimeAttaching = true;
-    private RecentAdapter adapter;
     private CompositeSubscription subscriptions;
+    private RecentAdapter adapter;
+    private ConversationHandler conversationHandler;
+    private boolean firstTimeAttaching = true;
 
     @Override
     public void onViewAttached(final RecentFragment fragment) {
@@ -64,14 +67,28 @@ public final class RecentPresenter implements
     private void initLongLivingObjects() {
         this.subscriptions = new CompositeSubscription();
         this.adapter = new RecentAdapter()
-                .setOnItemClickListener(this);
+                .setOnItemClickListener(this)
+                .setOnItemLongClickListener(
+                        conversation -> this.conversationHandler.showConversationOptionsDialog(conversation)
+                );
     }
 
     private void initShortLivingObjects() {
+        initConversationHandler();
         initClickListeners();
         initRecentsAdapter();
         populateRecentsAdapter();
         attachSubscriber();
+    }
+
+    private void initConversationHandler() {
+        this.conversationHandler = new ConversationHandler(this.fragment, this::handleConversationDeleted);
+    }
+
+    private Unit handleConversationDeleted(final Conversation conversation) {
+        this.adapter.removeItem(conversation);
+        updateEmptyState();
+        return null;
     }
 
     private void initClickListeners() {
@@ -146,7 +163,7 @@ public final class RecentPresenter implements
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         this::handleConversation,
-                        this::handleConversationError
+                        throwable -> LogUtil.exception(getClass(), "Error during fetching conversation", throwable)
                 );
 
         this.subscriptions.add(sub);
@@ -155,10 +172,6 @@ public final class RecentPresenter implements
     private void handleConversation(final Conversation updatedConversation) {
         this.adapter.updateConversation(updatedConversation);
         updateEmptyState();
-    }
-
-    private void handleConversationError(final Throwable throwable) {
-        LogUtil.exception(getClass(), "Error during fetching conversation", throwable);
     }
 
     private void updateEmptyState() {
@@ -194,6 +207,7 @@ public final class RecentPresenter implements
     public void onViewDetached() {
         this.adapter.doDelete();
         this.subscriptions.clear();
+        this.conversationHandler.clear();
         this.fragment = null;
     }
 

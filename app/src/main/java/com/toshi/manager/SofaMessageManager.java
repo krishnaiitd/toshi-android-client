@@ -173,6 +173,16 @@ public final class SofaMessageManager {
                 .subscribeOn(Schedulers.io());
     }
 
+    public final Completable muteConveration(final String threadId) {
+        return this.conversationStore.muteConversation(threadId, true)
+                .subscribeOn(Schedulers.io());
+    }
+
+    public final Completable unmuteConversation(final String threadId) {
+        return this.conversationStore.muteConversation(threadId, false)
+                .subscribeOn(Schedulers.io());
+    }
+
     public Completable deleteConversation(final Conversation conversation) {
         return this.conversationStore
                 .deleteByThreadId(conversation.getThreadId())
