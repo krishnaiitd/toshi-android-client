@@ -102,6 +102,7 @@ android {
 
 def supportLibVersion = '26.1.0'
 def retrofitVersion = '2.3.0'
+def archVersion = '1.0.0'
 
 dependencies {
     compile(
@@ -144,6 +145,8 @@ dependencies {
             'com.vdurmont:emoji-java:3.3.0',
             //Kotlin
             "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
+            //Architecture components
+            "android.arch.lifecycle:extensions:$archVersion",
     )
 
     kapt 'com.android.databinding:compiler:2.3.1'
@@ -197,9 +200,12 @@ dependencyVerification {
             'com.github.toshiapp:cropiwa:5915ee657603d9db8894c430171328ad2d767f2ee22a8a53e9e92593719b10b0',
             'com.github.toshiapp:ahbottomnavigation:ea8d292b34e908659374183fa7d0fa259aa83e99eabefa1aa89a45ee4ef0e145',
             'com.vdurmont:emoji-java:71b1a7cb312533ddc132583c8f84e9bde9ebfb13282cd4462978334fa1c04e9a',
+            'org.jetbrains.kotlin:kotlin-stdlib-jre7:7062f55a80cf67d4977c9ed8f0c766633e04cf2c9cc24fdc926dcf706612959a',
+            'android.arch.lifecycle:extensions:851f718fd2afda1e7aa93537dae1a5c1fe47710db62dcd7cd24c4b3b14ef0d90',
             'com.crashlytics.sdk.android:crashlytics:8fd52c8fd857e67fb015de4f7eaa2510223a19bb308c59d8264f08f7dd641372',
             'com.google.firebase:firebase-core:558cda4b5421d0ad206a7c14247b649579aebc37259082e80579e14199042ea0',
             'com.android.databinding:library:f172550208c2e86973271cdc1d9b527545d923527abed2daa894cf1499619869',
+            'com.android.databinding:baseLibrary:d3cbb38a09f934cf9de92310ed7b97717cc965fe5e4c4a022f3aa72e7c2cef6b',
             'com.android.databinding:adapters:9894e5c9f53f931360e9782ac95eb63534597bc57009d70ca68b841eb4b380d3',
             'com.google.code.findbugs:jsr305:766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7',
             'com.getkeepsafe.relinker:relinker:b3edab0c22e3d46c43e3e9cdfe34e247ae3fd9306160ec1505794d375ed5261f',
@@ -228,6 +234,12 @@ dependencyVerification {
             'org.whispersystems:signal-protocol-java:5152c2b01a25147967d6bf82e540f947901bdfa79260be3eb3e96b03f787d6b5',
             'org.apache.httpcomponents:httpclient:c50eafa5477af2fa8217d3f729b815ff3c669dbc467552c0feeedc61be965523',
             'org.json:json:8e5aa0a368bee60347b5a4ad861d9f68c7793f60deeea89efd449eb70d5ae622',
+            'org.jetbrains.kotlin:kotlin-stdlib:0156d3f3f54a82eda56285b82aa85caadfdf00d90cde549f7091e0bb0702aad2',
+            'android.arch.lifecycle:runtime:d0b36278878c82b838acc4308595bec61a3b5f6e7f2acc34172d7e071b2cf26d',
+            'android.arch.core:common:5192934cd73df32e2c15722ed7fc488dde90baaec9ae030010dd1a80fb4e74e1',
+            'android.arch.core:runtime:9e08fc5c4d6e48f58c6865b55ba0e72a88f907009407767274187a873e524734',
+            'com.android.support:support-fragment:a0ab3369ef40fe199160692f0463a5f63f1277ebfb64dd587c76fdb128d76b32',
+            'android.arch.lifecycle:common:ff0215b54e7cbaaa898f8fd00e265ed6ea198859e10604bc1c5e78477df48b5c',
             'com.crashlytics.sdk.android:beta:5045a1dcfd4461ef398ea999a94d8f7fa31ab589d296cb849ea0b751e91d75ca',
             'com.crashlytics.sdk.android:crashlytics-core:8ea320d38abcb9d1aea7f2b9895781137925babb17c40a4ae9c298570670ec93',
             'io.fabric.sdk.android:fabric:2d2e8b920042bc59b7610639885314718b53ac3f3f9744587d04d0304880a557',
@@ -240,16 +252,13 @@ dependencyVerification {
             'org.apache.httpcomponents:httpcore:1ef8db5d30b7741ab5fdf6df876a090a7dd51623e83f3736d0bb8fb1b5ead32f',
             'commons-logging:commons-logging:daddea1ea0be0f56978ab3006b8ac92834afeefbd9b7e4e6316fca57df0fa636',
             'commons-codec:commons-codec:ad19d2601c3abf0b946b5c3a4113e226a8c1e3305e395b90013b78dd94a723ce',
+            'org.jetbrains:annotations:ace2a10dc8e2d5fd34925ecac03e4988b2c0f851650c94b8cef49ba1bd111478',
+            'com.android.support:support-core-utils:4fda6d4eb430971e3b1dad7456988333f374b0f4ba15f99839ca1a0ab5155c8a',
             'com.google.firebase:firebase-common:2840d577e8ac8a3be44305e325dd624a8ac16da4d5faf1108968097098d71be2',
             'com.google.firebase:firebase-analytics-impl:a6558f7cd52fd34c7c3a3560022577da6dcd4d799dbd8505064efaffd5a9f721',
             'com.google.firebase:firebase-iid:17998d862835f1069cb807e2295b552f433238cc705f9a470be8986129e7b81f',
-            'android.arch.lifecycle:runtime:e4e34e5d02bd102e8d39ddbc29f9ead8a15a61e367993d02238196ac48509ad8',
-            'android.arch.lifecycle:common:86bf301a20ad0cd0a391e22a52e6fbf90575c096ff83233fa9fd0d52b3219121',
-            'android.arch.core:common:5192934cd73df32e2c15722ed7fc488dde90baaec9ae030010dd1a80fb4e74e1',
             'com.squareup.okhttp3:okhttp:c1d57f913f74f61d424d4250a92723ba9a61affc12a0ab194d84cc179b472841',
             'com.android.support:support-media-compat:9d8cee7cd40eff22ebdeb90c8e70f5ee96c5bd25cb2c3e3b3940e27285a3e98a',
-            'com.android.support:support-core-utils:4fda6d4eb430971e3b1dad7456988333f374b0f4ba15f99839ca1a0ab5155c8a',
-            'com.android.support:support-fragment:a0ab3369ef40fe199160692f0463a5f63f1277ebfb64dd587c76fdb128d76b32',
             'com.squareup.okio:okio:734269c3ebc5090e3b23566db558f421f0b4027277c79ad5d176b8ec168bb850',
     ]
 }
