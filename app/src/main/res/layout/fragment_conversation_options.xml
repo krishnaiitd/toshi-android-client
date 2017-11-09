@@ -16,16 +16,9 @@
   ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<resources>
-    <string-array name="settings_options">
-        <item>Local currency</item>
-        <item>Advanced</item>
-        <item>Sign out</item>
-    </string-array>
-
-    <string-array name="conversation_options">
-        <item>Mute</item>
-        <item>Block</item>
-        <item>Delete</item>
-    </string-array>
-</resources>
+<android.support.v7.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/options"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:minWidth="320dp"/>

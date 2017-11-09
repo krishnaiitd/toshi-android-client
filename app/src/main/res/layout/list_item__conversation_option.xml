@@ -16,16 +16,14 @@
   ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<resources>
-    <string-array name="settings_options">
-        <item>Local currency</item>
-        <item>Advanced</item>
-        <item>Sign out</item>
-    </string-array>
-
-    <string-array name="conversation_options">
-        <item>Mute</item>
-        <item>Block</item>
-        <item>Delete</item>
-    </string-array>
-</resources>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="54dp"
+    android:gravity="center_vertical"
+    android:textSize="14sp"
+    android:textColor="@color/textColorPrimary"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="?android:selectableItemBackground"
+    tools:text="Option"/>
