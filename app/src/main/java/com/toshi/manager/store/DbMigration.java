@@ -263,6 +263,13 @@ public class DbMigration implements RealmMigration {
 
             oldVersion++;
         }
+
+        if (oldVersion == 17) {
+            schema.get("Conversation")
+                    .addField("isMuted", boolean.class);
+
+            oldVersion++;
+        }
     }
 
     @Override

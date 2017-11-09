@@ -167,6 +167,12 @@ public final class SofaMessageManager {
                 .flatMap(this.conversationStore::createEmptyConversation);
     }
 
+    public final Single<Boolean> isConversationMuted(final String threadId) {
+        return this.conversationStore.loadByThreadId(threadId)
+                .map(Conversation::isMuted)
+                .subscribeOn(Schedulers.io());
+    }
+
     public Completable deleteConversation(final Conversation conversation) {
         return this.conversationStore
                 .deleteByThreadId(conversation.getThreadId())
