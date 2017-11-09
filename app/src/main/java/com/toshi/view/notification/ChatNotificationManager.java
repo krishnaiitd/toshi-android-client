@@ -87,6 +87,19 @@ public class ChatNotificationManager extends ToshiNotificationBuilder {
     }
 
     public static void showChatNotification(final Recipient sender, final SofaMessage sofaMessage) {
+        checkIfConversationIsAccepted(sofaMessage.getSender().getToshiId())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        isMuted -> checkIfConversationIsMutedAndShowNotification(sender, sofaMessage, isMuted),
+                        throwable -> LogUtil.e("ChatNotificationManager", "Error while parsing sofa message " + throwable)
+                );
+    }
+
+    private static void checkIfConversationIsMutedAndShowNotification(final Recipient sender,
+                                                                     final SofaMessage sofaMessage,
+                                                                     final boolean isMuted) {
+        if (isMuted) return;
+
         final ChatNotification activeChatNotification = getAndCacheChatNotification(sender);
         if (activeChatNotification == null) return;
 
@@ -102,6 +115,14 @@ public class ChatNotificationManager extends ToshiNotificationBuilder {
             if (payment == null) return;
             getLocalPriceAndShowPaymentNotification(sender, payment, sofaMessage);
         }
+    }
+
+    private static Single<Boolean> checkIfConversationIsAccepted(final String toshiId) {
+        return BaseApplication
+                .get()
+                .getSofaMessageManager()
+                .loadConversation(toshiId)
+                .map(conversation -> conversation != null && conversation.isMuted());
     }
 
     private static PaymentRequest getPaymentRequestFromMessage(final SofaMessage sofaMessage) {
