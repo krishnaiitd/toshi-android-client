@@ -16,313 +16,310 @@
   ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_vertical"
+        android:focusableInTouchMode="true"
+        style="@style/Toolbar">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Toolbar.TitleText"
+            android:text="@string/tab_browse"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        app:elevation="0dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:gravity="center_vertical"
-            android:focusableInTouchMode="true"
-            style="@style/Toolbar">
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Toolbar.TitleText"
-                android:text="@string/tab_browse"/>
-
-        </android.support.v7.widget.Toolbar>
-
-        <android.support.design.widget.AppBarLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:elevation="0dp">
+            android:orientation="horizontal"
+            android:background="@color/input_bg">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/input_bg">
-
-                <EditText
-                    android:id="@+id/search"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="54dp"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    app:layout_scrollFlags="scroll"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    android:hint="@string/search_or_type_the_url"
-                    android:textSize="16sp"
-                    android:background="@color/input_bg"
-                    android:inputType="textUri"
-                    android:singleLine="true"
-                    android:maxLines="1"
-                    android:imeOptions="actionDone"/>
-
-                <ImageButton
-                    android:id="@+id/clear_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/searchClearButton"
-                    app:srcCompat="@drawable/ic_clear"
-                    tools:visibility="visible" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="10dp"
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="54dp"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 app:layout_scrollFlags="scroll"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:background="@color/divider"/>
+                android:hint="@string/search_or_type_the_url"
+                android:textSize="16sp"
+                android:background="@color/input_bg"
+                android:inputType="textUri"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:imeOptions="actionDone"/>
 
-        </android.support.design.widget.AppBarLayout>
+            <ImageButton
+                android:id="@+id/clearButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/searchClearButton"
+                app:srcCompat="@drawable/ic_clear"
+                tools:visibility="visible" />
 
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/scroll_view"
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            app:layout_scrollFlags="scroll"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:background="@color/divider"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
+
+            <!-- Top rated apps -->
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin">
 
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="20dp" />
-
-                <!-- Top rated apps -->
-                <FrameLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin">
+                    android:textSize="16sp"
+                    android:textColor="@color/categoryTextColor"
+                    android:text="@string/top_rated_apps"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/categoryTextColor"
-                        android:text="@string/top_rated_apps"/>
-
-                    <TextView
-                        android:id="@+id/more_top_rated_apps"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:padding="4dp"
-                        android:background="?android:selectableItemBackground"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorPrimary"
-                        android:text="@string/more"/>
-
-                </FrameLayout>
-
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="24sp" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/top_rated_apps"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/moreTopRatedApps"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minHeight="143dp"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:clipToPadding="false"/>
+                    android:layout_gravity="right"
+                    android:padding="4dp"
+                    android:background="?android:selectableItemBackground"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/more"/>
 
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="25dp" />
+            </FrameLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:background="@color/divider"/>
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="24sp" />
 
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="20dp" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/topRatedApps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="143dp"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:clipToPadding="false"/>
 
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="25dp" />
 
-                <FrameLayout
-                    android:layout_width="match_parent"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:background="@color/divider"/>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin">
+                    android:textSize="16sp"
+                    android:textColor="@color/categoryTextColor"
+                    android:text="@string/featured_apps"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/categoryTextColor"
-                        android:text="@string/featured_apps"/>
-
-                    <TextView
-                        android:id="@+id/more_latest_apps"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:padding="4dp"
-                        android:background="?android:selectableItemBackground"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorPrimary"
-                        android:text="@string/more"/>
-
-                </FrameLayout>
-
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="24sp" />
-
-                <!-- Latest apps -->
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/featured_apps"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/moreLatestApps"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minHeight="143dp"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:clipToPadding="false"/>
+                    android:layout_gravity="right"
+                    android:padding="4dp"
+                    android:background="?android:selectableItemBackground"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/more"/>
 
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="25dp" />
+            </FrameLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:background="@color/divider"/>
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="24sp" />
 
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="20dp" />
+            <!-- Latest apps -->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/featuredApps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="143dp"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:clipToPadding="false"/>
 
-                <!-- Top rated public users -->
-                <FrameLayout
-                    android:layout_width="match_parent"
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="25dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:background="@color/divider"/>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
+
+            <!-- Top rated public users -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin">
+                    android:textSize="16sp"
+                    android:textColor="@color/categoryTextColor"
+                    android:text="@string/top_rated_public_users"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/categoryTextColor"
-                        android:text="@string/top_rated_public_users"/>
-
-                    <TextView
-                        android:id="@+id/more_top_rated_public_users"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:padding="4dp"
-                        android:background="?android:selectableItemBackground"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorPrimary"
-                        android:text="@string/more"/>
-
-                </FrameLayout>
-
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="24sp" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/top_rated_public_users"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/moreTopRatedPublicUsers"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minHeight="143dp"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:clipToPadding="false"/>
+                    android:layout_gravity="right"
+                    android:padding="4dp"
+                    android:background="?android:selectableItemBackground"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/more"/>
 
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="25dp" />
+            </FrameLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:background="@color/divider"/>
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="24sp" />
 
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="20dp" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/topRatedPublicUsers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="143dp"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:clipToPadding="false"/>
 
-                <!-- Latest public users -->
-                <FrameLayout
-                    android:layout_width="match_parent"
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="25dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:background="@color/divider"/>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
+
+            <!-- Latest public users -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin">
+                    android:textSize="16sp"
+                    android:textColor="@color/categoryTextColor"
+                    android:text="@string/latest_public_users"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/categoryTextColor"
-                        android:text="@string/latest_public_users"/>
-
-                    <TextView
-                        android:id="@+id/more_latest_public_users"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:padding="4dp"
-                        android:background="?android:selectableItemBackground"
-                        android:textSize="14sp"
-                        android:textColor="@color/colorPrimary"
-                        android:text="@string/more"/>
-
-                </FrameLayout>
-
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="24sp" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/latest_public_users"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/moreLatestPublicUsers"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minHeight="143dp"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:clipToPadding="false"/>
+                    android:layout_gravity="right"
+                    android:padding="4dp"
+                    android:background="?android:selectableItemBackground"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/more"/>
 
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="30dp" />
+            </FrameLayout>
 
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="24sp" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/search_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-    </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/latestPublicUsers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="143dp"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:clipToPadding="false"/>
 
-</layout>
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="30dp" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/searchList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+</LinearLayout>

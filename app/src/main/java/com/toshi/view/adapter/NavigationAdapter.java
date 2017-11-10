@@ -43,7 +43,7 @@ public class NavigationAdapter extends FragmentPagerAdapter {
         activity.getMenuInflater().inflate(menuRes, menu);
 
         fragments.clear();
-        fragments.add(BrowseFragment.newInstance());
+        fragments.add(new BrowseFragment());
         fragments.add(new RecentFragment());
         fragments.add(new RecentFragment()); // <-- This can be anything. In reality it is the Scan functionality
         fragments.add(ContactsFragment.newInstance());
