@@ -44,8 +44,8 @@ public class NavigationAdapter extends FragmentPagerAdapter {
 
         fragments.clear();
         fragments.add(BrowseFragment.newInstance());
-        fragments.add(RecentFragment.newInstance());
-        fragments.add(RecentFragment.newInstance()); // <-- This can be anything. In reality it is the Scan functionality
+        fragments.add(new RecentFragment());
+        fragments.add(new RecentFragment()); // <-- This can be anything. In reality it is the Scan functionality
         fragments.add(ContactsFragment.newInstance());
         fragments.add(MeFragment.newInstance());
     }

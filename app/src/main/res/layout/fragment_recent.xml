@@ -16,102 +16,98 @@
   ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<layout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/windowBackground">
 
     <LinearLayout
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/windowBackground">
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_vertical"
+        android:theme="@style/AddToolbarTheme"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        style="@style/Toolbar">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Toolbar.TitleText"
+            android:text="@string/tab_recent"/>
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="0dp" />
+
+        <ImageButton
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_add_white"
+            style="@style/clickableBorderlessBackground"/>
+    </LinearLayout>
+
+    <ViewSwitcher
+        android:id="@+id/emptyStateSwitcher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:background="@color/windowBackground"/>
 
         <LinearLayout
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:gravity="center_vertical"
-            android:theme="@style/AddToolbarTheme"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            style="@style/Toolbar">
+            android:id="@+id/emptyState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal">
 
             <TextView
-                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Toolbar.TitleText"
-                android:text="@string/tab_recent"/>
+                android:textSize="20sp"
+                android:textColor="@color/textColorPrimary"
+                android:textStyle="normal"
+                android:fontFamily="@string/fontFamily_medium"
+                android:text="@string/no_chats_yet"/>
 
             <android.support.v4.widget.Space
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="0dp" />
+                android:layout_height="11dp" />
 
-            <ImageButton
-                android:id="@+id/add"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_add_white"
-                style="@style/clickableBorderlessBackground"/>
+                android:layout_marginLeft="54dp"
+                android:layout_marginRight="54dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/textColorSecondaryTransparent"
+                android:text="@string/empty_state_recent_message"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
+
+            <Button
+                android:id="@+id/startChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextViewButton"
+                android:text="@string/start_a_chat"/>
+
         </LinearLayout>
-
-        <ViewSwitcher
-            android:id="@+id/empty_state__switcher"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recents"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:background="@color/windowBackground"/>
-
-            <LinearLayout
-                android:id="@+id/empty_state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="@color/textColorPrimary"
-                    android:textStyle="normal"
-                    android:fontFamily="@string/fontFamily_medium"
-                    android:text="@string/no_chats_yet"/>
-
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="11dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="54dp"
-                    android:layout_marginRight="54dp"
-                    android:gravity="center"
-                    android:textSize="16sp"
-                    android:textColor="@color/textColorSecondaryTransparent"
-                    android:text="@string/empty_state_recent_message"/>
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="20dp" />
-
-                <Button
-                    android:id="@+id/start_chat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/TextViewButton"
-                    android:text="@string/start_a_chat"/>
-
-            </LinearLayout>
-        </ViewSwitcher>
-    </LinearLayout>
-
-</layout>
+    </ViewSwitcher>
+</LinearLayout>
