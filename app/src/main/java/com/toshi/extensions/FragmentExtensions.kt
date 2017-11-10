@@ -25,4 +25,6 @@ inline fun <reified T> Fragment.startActivity(func: Intent.() -> Intent) = start
 
 inline fun <reified T> Fragment.startActivity() = startActivity(Intent(activity, T::class.java))
 
+fun Fragment.startExternalActivity(func: Intent.() -> Intent) = startActivity( Intent().func(), null)
+
 fun Fragment.getPxSize(@DimenRes id: Int) = resources.getDimensionPixelSize(id)

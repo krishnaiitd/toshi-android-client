@@ -16,119 +16,115 @@
   ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<layout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/windowBackground">
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/windowBackground">
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_vertical"
+        android:theme="@style/AddToolbarTheme"
+        style="@style/Toolbar">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Toolbar.TitleText"
+            android:text="@string/tab_4"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:gravity="center_vertical"
-            android:theme="@style/AddToolbarTheme"
-            style="@style/Toolbar">
+            android:layout_height="wrap_content"
+            app:elevation="0dp">
 
             <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Toolbar.TitleText"
-                android:text="@string/tab_4"/>
-
-        </android.support.v7.widget.Toolbar>
-
-        <android.support.design.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <android.support.design.widget.AppBarLayout
+                android:id="@+id/userSearch"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:elevation="0dp">
-
-                <TextView
-                    android:id="@+id/user_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="54dp"
-                    app:layout_scrollFlags="scroll"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    android:background="@color/windowBackground"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:text="@string/search_people"
-                    android:textColor="@color/textColorHint"
-                    android:textSize="16sp" />
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    app:layout_scrollFlags="scroll"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    android:background="@color/divider"/>
-
-            </android.support.design.widget.AppBarLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/contacts"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="54dp"
+                app:layout_scrollFlags="scroll"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:clipToPadding="false"
-                android:background="@color/windowBackground"/>
+                android:background="@color/windowBackground"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:text="@string/search_people"
+                android:textColor="@color/textColorHint"
+                android:textSize="16sp" />
 
-            <LinearLayout
-                android:id="@+id/empty_state"
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                app:layout_scrollFlags="scroll"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:background="@color/divider"/>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/favorites"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:clipToPadding="false"
+            android:background="@color/windowBackground"/>
+
+        <LinearLayout
+            android:id="@+id/emptyState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="64dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="64dp"
-                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/textColorPrimary"
+                android:textStyle="normal"
+                android:fontFamily="@string/fontFamily_medium"
+                android:text="@string/no_favorites_yet"/>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="11dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="54dp"
+                android:layout_marginRight="54dp"
                 android:gravity="center"
-                android:visibility="gone">
+                android:textSize="16sp"
+                android:textColor="@color/textColorSecondaryTransparent"
+                android:text="@string/empty_state_contact_message"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="@color/textColorPrimary"
-                    android:textStyle="normal"
-                    android:fontFamily="@string/fontFamily_medium"
-                    android:text="@string/no_favorites_yet"/>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
 
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="11dp" />
+            <Button
+                android:id="@+id/inviteFriends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextViewButton"
+                android:text="@string/invite_friends"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="54dp"
-                    android:layout_marginRight="54dp"
-                    android:gravity="center"
-                    android:textSize="16sp"
-                    android:textColor="@color/textColorSecondaryTransparent"
-                    android:text="@string/empty_state_contact_message"/>
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="20dp" />
-
-                <Button
-                    android:id="@+id/invite_friends"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/TextViewButton"
-                    android:text="@string/invite_friends"/>
-
-            </LinearLayout>
-        </android.support.design.widget.CoordinatorLayout>
-    </LinearLayout>
-
-</layout>
+        </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
